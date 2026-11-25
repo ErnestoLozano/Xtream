@@ -1,0 +1,45 @@
+# Xtream, monocular: one camera, uncalibrated.
+mode: mono
+model: depth-anything/DA3-GIANT-1.1     # every multi-view pass: windows, covisibility edges, loops, map passes
+calibrated: false                        # images as loaded; DA3 predicts the intrinsics
+
+window: 64                               # frames per window pass
+overlap: 3                               # frames shared by consecutive windows (the depth-ratio join on the first)
+keyframes: 8                             # per window: covisibility/loop retrieval and graph compression
+canon_aspect: 1.7777777777777777         # frames wider than crop_above (W/H) are centre-cropped to 16:9
+crop_above: 2.0
+
+edges:                                   # covisibility edges to windows 1-3 back with a SALAD keyframe match
+  gaps: [1, 2, 3]
+  salad_sim: 0.7
+loops:                                   # CLoSeR's streaming loop detection
+  salad_sim: 0.7
+  top_k: 5
+  min_gap_windows: 4
+  chord_arc: 0.85
+  nms_windows: 2
+
+backend:
+  lm_steps: [1, 100]                     # LM steps per window, per loop
+  imu_scale: [10, 1, 10, 10]             # unused without the IMU
+  reset_every: 5                         # windows per IMU-bias block and compression step
+  loop_gate_dof: null
+  lc_check_t: 1.0                        # CLoSeR's loop check: residual translation threshold, rounds
+  lc_check_iters: 3
+
+metric_prior:                            # each window's metre tied to a metric depth model on its keyframes
+  model: depth-anything/DA3METRIC-LARGE  # metres = output * f / 300, f = DA3-Giant's predicted focal
+  sigma0: 0.3                            # prior sigma until n0 windows, then mad_c * MAD of its inconsistency
+  n0: 5
+  mad_c: 3.0
+  static_gate: 0.01                      # no prior on windows whose camera extent / median depth is below this
+
+map:
+  hz: 5.0                                # map frames on a grid of this rate
+  pix: 4                                 # every pix-th pixel
+  conf_pct: 25                           # points above this percentile of the pass's confidence
+  range_m: 5.0                           # exported points within this distance of their camera [m] (null: all)
+  link_range_m: 5.0                      # conditioned passes: pixels within this depth enter the links
+  pass_frames: 16                        # conditioned map passes: frames per pass, stride
+  pass_stride: 12
+  snapshot_back: 256                     # live poses kept per window for the passes

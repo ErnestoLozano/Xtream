@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+
+# data, weights, outputs
+/data/
+/ckpt/
+/results/
+/results_*/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.log
+
+# local dataset paths
+configs/datasets.local.yaml
+
+# editors / OS
+.vscode/
+.idea/
+.DS_Store
+
+# fetched by scripts/download_checkpoints.py (not redistributed)
+/third_party/CLoSeR/

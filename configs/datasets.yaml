@@ -1,0 +1,62 @@
+# Dataset folders, relative to the data root ($XTREAM_DATA, default data/ in the repository) unless absolute.
+# scripts/download_data.py and scripts/prepare_data.py write these layouts (see xtream/data/README.md).
+# To use copies that already sit elsewhere, override any key in configs/datasets.local.yaml (not versioned).
+
+euroc:
+  raw: euroc                       # <room>/<seq>/mav0 (the official release)
+  prepared: euroc/prepared         # <seq>/cam0/{data, data.csv, intrinsics.txt} (undistorted)
+  sequences:
+    MH_01_easy: machine_hall/MH_01_easy
+    MH_02_easy: machine_hall/MH_02_easy
+    MH_03_medium: machine_hall/MH_03_medium
+    MH_04_difficult: machine_hall/MH_04_difficult
+    MH_05_difficult: machine_hall/MH_05_difficult
+    V1_01_easy: vicon_room1/V1_01_easy
+    V1_02_medium: vicon_room1/V1_02_medium
+    V1_03_difficult: vicon_room1/V1_03_difficult
+    V2_01_easy: vicon_room2/V2_01_easy
+    V2_02_medium: vicon_room2/V2_02_medium
+    V2_03_difficult: vicon_room2/V2_03_difficult
+
+kitti:
+  raw: kitti                       # sequences/<seq>/{image_2, calib.txt, times.txt}, poses/<seq>.txt
+  sequences: {"00": "00", "01": "01", "02": "02", "03": "03", "04": "04", "05": "05", "06": "06", "07": "07",
+              "08": "08", "09": "09", "10": "10"}
+
+oxford_spires:
+  raw: oxford_spires               # sequences/<sequence>/{raw/imu.csv, processed/trajectory/gt-tum.txt}, calibration/imu.yaml
+  prepared: oxford_spires/prepared # <sequence>/raw/{cam0, rgb.txt, cam0_intrinsics.txt} (rectified)
+  sequences:
+    keble02: 2024-03-12-keble-college-02
+    keble03: 2024-03-12-keble-college-03
+    keble04: 2024-03-12-keble-college-04
+    keble05: 2024-03-12-keble-college-05
+    obs01: 2024-03-13-observatory-quarter-01
+    obs02: 2024-03-13-observatory-quarter-02
+    blenheim05: 2024-03-14-blenheim-palace-05
+    christchurch02: 2024-03-18-christ-church-02
+    christchurch03: 2024-03-18-christ-church-03
+    christchurch05: 2024-03-20-christ-church-05
+    bodleian02: 2024-05-20-bodleian-library-02
+
+scarf:
+  raw: scarf                       # config/, rNN/{rNN_bag, rNN_gt}
+  prepared: scarf/prepared         # <seq>/<seq>_bag_sequence/{images/camera_rgb_undistorted, imu/imu_right/data.csv}
+  sequences: {r01: r01, r02: r02, r03: r03, r04: r04, r05: r05}
+
+vbr:
+  frames: vbr/frames               # <seq>_processed_aligned/{rgb, intrinsics.txt}, processed_gt/ (LoGeR authors' release)
+  raw: vbr/raw                     # <site>/<seq>/{vbr_calib.yaml, imu.csv} (from the official bags)
+  undistorted: vbr/undistorted     # <seq>/<index>.png, written on the first mono-inertial run
+  sequences:
+    campus_train0: campus/campus_train0
+    campus_train1: campus/campus_train1
+    ciampino_train1: ciampino/ciampino_train1
+    colosseo_train0: colosseo/colosseo_train0
+    diag_train0: diag/diag_train0
+    pincio_train0: pincio/pincio_train0
+    spagna_train0: spagna/spagna_train0
+
+custom:
+  raw: custom                      # <seq>/{images, times.txt (optional), gt.txt (optional)}: your own images (monocular)
+  fps: 30                          # image rate of sequences without times.txt

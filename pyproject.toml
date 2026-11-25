@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "xtream"
+version = "0.1.0"
+description = "Xtream: An Explicit Metric State for Large-Scale Streaming Reconstruction"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Ernesto Lozano" }, { name = "Alberto Jaenal" }, { name = "Javier Civera" }]
+# Exact, verified versions are in requirements.txt; torch is installed first, matched to your CUDA.
+dependencies = [
+    "numpy<2", "scipy", "opencv-python", "Pillow", "PyYAML", "matplotlib", "pandas",
+    "torch>=2.5", "torchvision",
+    "gtsam==4.3a0", "pypose", "kornia", "evo", "open3d",
+    "huggingface_hub", "safetensors", "einops", "omegaconf", "addict", "plyfile", "moviepy", "imageio",
+    "pycolmap", "trimesh",
+    "gdown", "rosbags", "rosbags-image",
+]
+
+[tool.setuptools.packages.find]
+include = ["xtream*"]
+exclude = ["third_party*", "scripts*"]
+
+[tool.setuptools.package-data]
+xtream = ["data/*.yaml", "data/vbr_frame_maps/*.csv"]

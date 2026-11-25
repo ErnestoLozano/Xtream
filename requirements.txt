@@ -1,0 +1,40 @@
+# Exact versions Xtream is verified with (Python 3.10, CUDA 12.8, one RTX 5090).
+# torch / torchvision are the CUDA-matched build: install them FIRST from the PyTorch index (see README).
+torch==2.11.0
+torchvision==0.26.0
+
+numpy==1.26.4
+scipy==1.15.3
+opencv-python==4.11.0.86
+Pillow==11.3.0
+PyYAML==6.0.3
+matplotlib==3.10.8     # evo's plotting backend (imported by evo)
+pandas==2.3.3          # evo
+
+# back end
+gtsam==4.3a0
+# init (VI3): IMU preintegration, GeoCalib
+pypose==0.9.5
+kornia==0.8.2
+kornia_rs==0.1.10
+# trajectories, maps
+evo==1.37.0
+open3d==0.18.0
+
+# Depth Anything 3 (imported at load by its API, including its export utilities)
+huggingface_hub==1.14.0
+safetensors==0.7.0
+einops==0.8.2
+omegaconf==2.3.0
+addict==2.4.0
+antlr4-python3-runtime==4.9.3
+plyfile==1.1.3
+moviepy==1.0.3
+imageio==2.37.4
+pycolmap==4.1.1
+trimesh==4.11.5
+
+# data download and preparation
+gdown==6.5.2           # ScaRF (Google Drive)
+rosbags==0.11.5        # ScaRF and VBR bags
+rosbags-image==0.10.3  # ScaRF compressed images

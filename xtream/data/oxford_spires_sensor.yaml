@@ -1,0 +1,9 @@
+# Oxford Spires sensor calibration (front camera, IMU, LiDAR, base), from the dataset's tools:
+# https://github.com/ori-drs/oxford_spires_dataset, configs/sensor.yaml (commit b456e1e), CC BY-NC-SA 4.0.
+# Transforms as t_xyz + q_xyzw.
+cam_front:
+  T_cam_lidar_t_xyz_q_xyzw: [0.00035060884033447846, -0.079574053851818, -0.053826061545697405, 0.5034725628949727,
+                             0.5003337192107279, -0.4947539264483171, 0.5013981452864594]
+  T_cam_imu_t_xyz_q_xyzw: [-0.0008544600980918986, 0.005115741648037186, -0.06898747851173177, 0.0042909719518877815,
+                           -0.7085293318962699, 0.705668106144218, 0.0005453193252705428]
+T_base_lidar_t_xyz_q_xyzw: [0.0, 0.0, 0.124, 0.0, 0.0, 1.0, 0.0]
